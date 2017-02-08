@@ -1,4 +1,5 @@
-## PiBakery for Arizona Newshacking
+*Note: this repo is out of date. The updated repo is [here](https://github.com/scottpham/sensorkit)*
+# PiBakery for Arizona Newshacking
 
 This repo contains a `.xml` file intended to be imported by the PiBakery program. It bootstraps a fresh Raspbian install with software updates and ensures that VNC is enabled with a unique hostname. That way you can simply SSH or VNC into "PIHOSTNAME.local" without having to know the IP address of the Pi.
 
