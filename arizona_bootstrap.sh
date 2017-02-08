@@ -20,7 +20,6 @@ apt-get -y install ipython
 apt-get -y install vim
 wget https://gist.githubusercontent.com/scottpham/7b1f79b81fec1ee48bed3ddf07594315/raw/ -O ~/.vimrc
 
-
 # rpi lib
 pip install RPi.GPIO
 
@@ -43,38 +42,38 @@ sed -i -e '$i \/etc/init.d/vncserver-x11-serviced start \n' /etc/rc.local
 
 filekill() {
   if [ -e "$1" ]; then
-    sudo rm "$1"
+    rm "$1"
   fi
 }
 
 tzup() {
   # change this line for timezone
-	cp /usr/share/zoneinfo/America/Phoenix /etc/localtime
-	ntpd
+  cp /usr/share/zoneinfo/America/Phoenix /etc/localtime
+  ntpd
 }
 tzup
 #==================================================== Update the keyboard layout
 kbd() {
-	sed -i /etc/default/keyboard -e 's|pc101|pc105|'
-	sed -i /etc/default/keyboard -e 's|gb|us|'
-	service keyboard-setup restart
+  sed -i /etc/default/keyboard -e 's|pc101|pc105|'
+  sed -i /etc/default/keyboard -e 's|gb|us|'
+  #filekill "/etc/default/keyboard"
+  #sudo mv /home/pi/openwinkrpi/keyboard /etc/default/keyboard
+  service keyboard-setup restart
 }
 kbd
 #======================================================= Update Locale(Language)
 lcale() {
-	locale-gen
-	sh -c 'sed -i /etc/default/locale -e "s/en_GB.UTF-8/en_US.UTF-8/"'
-	sh -c 'sed -i /etc/locale.gen -e "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/"'
-	sh -c 'sed -i /etc/locale.gen -e "s/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/"'
-	LANG=en_US.UTF-8
-	LANGUAGE=en_US.UTF-8
-	LC_TIME=en_US.UTF-8
-	LC_COLLATE=en_US.UTF-8
-	LC_NUMERIC=en_US.UTF-8
-	LC_DATE=en_US.UTF-8
-	LC_MESSAGES=en_US.UTF-8
-	locale-gen --purge en_US.UTF-8
+  locale-gen
+  sh -c 'sed -i /etc/default/locale -e "s/en_GB.UTF-8/en_US.UTF-8/"'
+  sh -c 'sed -i /etc/locale.gen -e "s/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/"'
+  sh -c 'sed -i /etc/locale.gen -e "s/en_GB.UTF-8 UTF-8/# en_GB.UTF-8 UTF-8/"'
+  LANG=en_US.UTF-8
+  LANGUAGE=en_US.UTF-8
+  LC_TIME=en_US.UTF-8
+  LC_COLLATE=en_US.UTF-8
+  LC_NUMERIC=en_US.UTF-8
+  LC_DATE=en_US.UTF-8
+  LC_MESSAGES=en_US.UTF-8
+  locale-gen --purge en_US.UTF-8
 }
 lcale
-
-exit 0
